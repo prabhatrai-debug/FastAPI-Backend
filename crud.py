@@ -88,3 +88,5 @@ def delete_student(student_id:int):
             students.remove(student)
             return{"message":"our book deleted"}
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Student not found")      
+
+    
