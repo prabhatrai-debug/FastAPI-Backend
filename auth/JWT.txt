@@ -1,0 +1,31 @@
+#Authentication-: This is the process of verifying who a user is - usually through a  login system (like email , password ). only authenticated users should access certain parts of your API.
+
+#Authorization-: After authentication, authorization determines what the authenticated user is allowed to do - e.g. regular user vs admin 
+                  
+
+--------------------------Json Web Token (JWT)-------------------------#
+
+#a compact token sent by clients to prove they are authenticated .
+#tokens are signed with secret key , so the server can verify they haven't been tempered with .
+#No server side session storage is needed - everything needed to verify is inside the token.
+
+#------------How JWT works-------------------#
+1.User login with credentials 
+2.Server verifies login and generates a jwt token 
+3.Client includes this token in the Authorization header for future requests
+4.Server checks token validity before responding 
+5.This pattern makes scalable and ststeless authentication possible 
+
+#---------------------How OAuth2 password flow works in fastapi---------------------------#
+1.The client sends username + password to a login endpoint 
+2.Server  checks credentials
+3.Server return a JWT token
+4.Client sends the token in Authorization:Bearer<token>header
+5.FastAPI checks token before allowing access to protected routes 
+
+
+ 
+
+
+
+
