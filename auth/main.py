@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException,status
 from sqlalchemy.orm import session
-import model, schemas , utils 
-from auth_database import get_db
+from auth import model, schemas , utils 
+from auth.auth_database import get_db
 from jose import jwt
 from datetime import datetime, timedelta
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
@@ -103,7 +103,7 @@ def require_roles(allowed_roles:list[str]):
 
 
 @app.get("/profile")
-def profile(current_user:dict=Depends(require_roles(["user","admin","civil engineer"]))): #----------------------------------
+def profile(current_user:dict=Depends(require_roles(["user","admin","civil engineer"]))): 
     return {"message" : f"profile of {current_user['username']} ({current_user['role']})"}
 
 
@@ -112,16 +112,5 @@ def user_dashboard(current_user:dict=Depends(require_roles(["user","civil engine
     return {"message":"welcome user"}
 
 @app.get("/admin/dashboard")
-def user_dashboard(current_user:dict=Depends(require_roles(["admin"]))):
+def user_dashboard(current_user:dict=Depends(require_roles(["admin"]))):     #this will show forbidden error because here we are provided to access as a admin means only admin have given this access  not user 
     return {"message":"welcome admin"}
-
-
-
-
-
-
-
-
-
-
-
